@@ -1,5 +1,6 @@
 package com.amazon.ata.dynamodbscanandserialization.icecream.model;
 
+import com.amazon.ata.dynamodbscanandserialization.icecream.converter.SundaeConverter;
 import com.amazon.ata.dynamodbscanandserialization.icecream.converter.ZonedDateTimeConverter;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
@@ -23,6 +24,8 @@ public class Receipt {
     private String customerId;
     private ZonedDateTime purchaseDate;
     private BigDecimal salesTotal;
+
+    private List<Sundae> sundaes;
 
     @DynamoDBHashKey(attributeName = "customerId")
     public String getCustomerId() {
@@ -52,10 +55,17 @@ public class Receipt {
         this.salesTotal = salesTotal;
     }
 
-    @DynamoDBIgnore
+    //@DynamoDBIgnore
+    @DynamoDBAttribute(attributeName = "sundaes")
+    @DynamoDBTypeConverted(converter = SundaeConverter.class)
     public List<Sundae> getSundaes() {
         // TODO: updated this getter
-        return Collections.emptyList();
+        //return Collections.emptyList();
+        return sundaes;
+    }
+
+    public void setSundaes(List<Sundae> sundaes) {
+        this.sundaes = sundaes;
     }
 
     @Override

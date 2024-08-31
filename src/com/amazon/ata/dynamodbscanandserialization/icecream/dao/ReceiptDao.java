@@ -42,6 +42,7 @@ public class ReceiptDao {
         receipt.setCustomerId(customerId);
         receipt.setPurchaseDate(ZonedDateTime.now());
         receipt.setSalesTotal(sundaeList.stream().map(Sundae::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+        receipt.setSundaes(sundaeList);
 
         mapper.save(receipt);
         return receipt;
