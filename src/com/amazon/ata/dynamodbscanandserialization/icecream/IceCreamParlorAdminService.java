@@ -31,7 +31,8 @@ public class IceCreamParlorAdminService {
      * @return the total amount of sales during the time period
      */
     public BigDecimal getSalesForTimePeriod(final ZonedDateTime fromDate, final ZonedDateTime toDate) {
-        return new BigDecimal(-1);
+        //return new BigDecimal(-1);
+        return receiptDao.getSalesBetweenDates(fromDate, toDate);
     }
 
     /**
@@ -45,7 +46,8 @@ public class IceCreamParlorAdminService {
      * @return a list of Receipts of size limit or less than limit if the end of the receipts has been reached
      */
     public List<Receipt> getCustomerReceipts(final int limit, final Receipt exclusiveStartReceipt) {
-        return Collections.emptyList();
+        //return Collections.emptyList();
+        return receiptDao.getReceiptsPaginated(limit, exclusiveStartReceipt);
     }
 
 }
